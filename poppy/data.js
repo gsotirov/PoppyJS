@@ -30,7 +30,7 @@ var poppy = poppy || {};
 
 	var Success = (function() {
 		function Success(title, message) {
-			return Notification.call(this, title, message, 'Success', 'bottomLeft', false, false);
+			return Notification.call(this, title, message, 'Success', 'bottomLeft', true, false);
 		}
 		return Success;
 	})();
@@ -44,7 +44,7 @@ var poppy = poppy || {};
 
 	var Error = (function() {
 		function Error(title, message) {
-			return Notification.call(this, title, message, 'Error', 'topRight', false, true, 4000);
+			return Notification.call(this, title, message, 'Error', 'topRight', true, false);
 		}
 		return Error;
 	})();

@@ -4,8 +4,8 @@ var poppy = poppy || {};
 	'use strict';
 
 	var OP_STEP = 0.1,
-		FADE_OUT_TIME = 1,
-		FADE_IN_TIME = 1;
+		FADE_OUT_TIME = 20,
+		FADE_IN_TIME = 10;
 
 	function pop(type, title, message, callback) {
 
