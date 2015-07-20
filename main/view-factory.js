@@ -9,13 +9,15 @@ var poppy = poppy || {};
             'topLeft': 'poppy-top-left',
             'topRight': 'poppy-top-right',
             'bottomLeft': 'poppy-bottom-left',
-            'bottomRight': 'poppy-bottom-right'
+            'bottomRight': 'poppy-bottom-right',
+            'center': 'poppy-center'
         },
         POPUP_TYPES = {
             'Error': 'poppy-error',
             'Info': 'poppy-info',
             'Success': 'poppy-success',
-            'Warning': 'poppy-warning'
+            'Warning': 'poppy-warning',
+            'Modal': 'poppy-modal'
         };
 
     var createPopupView = function(popup) {
@@ -25,6 +27,7 @@ var poppy = poppy || {};
             autoHide = popupData.autoHide || false,
             timeout = popupData.timeout,
             close = popupData.closeButton || false,
+            controls = popupData.controls || false,
             title = popupData.title,
             message = popupData.message,
             callback = popupData.callback;
@@ -32,6 +35,8 @@ var poppy = poppy || {};
         var containerNode = document.createElement('div'),
             popupNode = document.createElement('div'),
             button = document.createElement('button'),
+            okButton = document.createElement('button'),
+            cancelButton = document.createElement('button'),
             titleNode = document.createElement('div'),
             messageNode = document.createElement('div');
 
@@ -42,6 +47,17 @@ var poppy = poppy || {};
             button.setAttribute('type', 'button');
             button.className += "poppy-close-button";
             popupNode.appendChild(button);
+        }
+        
+        if (controls === true) {
+            okButton.innerText = 'Ok';
+            cancelButton.innerText = 'Cancel';
+            okButton.setAttribute('type', 'button');
+            okButton.setAttribute('class', 'btn btn-success');
+            cancelButton.setAttribute('type', 'button');
+            cancelButton.setAttribute('class', 'btn btn-error');
+            popupNode.appendChild(okButton);
+            popupNode.appendChild(cancelButton);
         }
 
         containerNode.appendChild(popupNode);

@@ -23,6 +23,9 @@ var poppy = poppy || {};
 	    	break;
 	    	case 'Warning':
 	    		popup = new p._data.Warning(title, message, callback);
+            break;
+            case 'Modal':
+                popup = new p._data.Modal(title, message, callback);
 	    	break;
 	    }
 		// generate view from view factory
@@ -83,4 +86,3 @@ var poppy = poppy || {};
 	p.pop = pop;
 
 })(poppy);
-

@@ -35,13 +35,14 @@
 
 (function () {
 	'use strict';
-
-	poppy.pop('Success', 'Success!', 'You have successfully logged in!');
-	poppy.pop('Info', 'Check this out', 'You have 3 unread messages in your inbox');
-	poppy.pop('Error', 'Something went really wrong', 'Your credentials seem to be incorrect');
-	poppy.pop('Warning', 'Some errors have occured during installation', 'Click to check out our installation guide.', function () {
-		window.location = 'http://google.com';
-	});
-
+    
+    poppy.pop(
+        'Modal', 
+        'Would you like to go on a date with me?', 
+        'Click to confirm if you are willing to have the best time of your life...', 
+        function () {
+            alert('Yeah');
+        }
+    );
 })();
 
