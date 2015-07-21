@@ -9,13 +9,6 @@ under the MIT license
     font-weight: bold;
 }
 
-.poppy-modal .poppy-title {
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #d4d4d4;
-    
-}
-
 .poppy-message {
     -ms-word-wrap: break-word;
     word-wrap: break-word;
@@ -27,6 +20,20 @@ under the MIT license
 .poppy-message a:hover {
     color: #cccccc;
     text-decoration: none;
+}
+.poppy-modal-container .poppy-close-button {
+    position: relative;
+    right: 0.3em;
+    top: 0.3em;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    -webkit-text-shadow: 0 1px 0 #ffffff;
+    text-shadow: 0 1px 0 #ffffff;
+    opacity: 0.8;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+    filter: alpha(opacity=80);
 }
 .poppy-close-button {
     position: relative;
@@ -99,15 +106,77 @@ button.poppy-close-button {
 }
 .poppy-center {
     top: 50px;
-    width: 100%;
+    width: 99%;
 }
 
-.poppy-container {
+/*
+---> Poppy Modal Styles
+*/
+
+.poppy-modal-container {
+    padding: 0;
+}
+
+.poppy-modal {
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 0 !important;
+    font-family: Verdana;
+    border: 1px solid #d4d4d4;
+    box-shadow: 0 0 5px #d4d4d4;
+}
+
+.poppy-modal-message,
+.poppy-modal-title {
+    padding: 10px;
+}
+
+.poppy-modal-title {
+    font-family: 'Oswald';
+    font-weight: Lighter;
+    font-size: 26px;
+    background: #0088cc;
+    color: #fff;
+    text-shadow: 1px 1px 1px #333;
+}
+
+.poppy-modal-message {
+    font-size: 12px;
+    color: #808080;
+    line-height: 18px;
+}
+
+.poppy-modal .controls {
+    padding: 10px;
+    background: #eee;
+    border-top: 1px solid #d4d4d4;
+    text-align: right;
+}
+.poppy-modal .controls .btn {
+    margin-right: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 7px;
+    width: 70px;
+    border: none;
+    outline: none;
+    text-shadow: 1px 1px 1px #000;
+    color: #fff;
+}
+.poppy-modal .controls .btn.btn-success {
+    background: rgb(108, 181, 108);
+}
+.poppy-modal .controls .btn.btn-error {
+    background: rgb(219, 94, 94);
+}
+
+.poppy-container,
+.poppy-modal-container {
     position: fixed;
     z-index: 999999;
     /*overrides*/
-
 }
+
 .poppy-container * {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -173,7 +242,7 @@ button.poppy-close-button {
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGYSURBVEhL5ZSvTsNQFMbXZGICMYGYmJhAQIJAICYQPAACiSDB8AiICQQJT4CqQEwgJvYASAQCiZiYmJhAIBATCARJy+9rTsldd8sKu1M0+dLb057v6/lbq/2rK0mS/TRNj9cWNAKPYIJII7gIxCcQ51cvqID+GIEX8ASG4B1bK5gIZFeQfoJdEXOfgX4QAQg7kH2A65yQ87lyxb27sggkAzAuFhbbg1K2kgCkB1bVwyIR9m2L7PRPIhDUIXgGtyKw575yz3lTNs6X4JXnjV+LKM/m3MydnTbtOKIjtz6VhCBq4vSm3ncdrD2lk0VgUXSVKjVDJXJzijW1RQdsU7F77He8u68koNZTz8Oz5yGa6J3H3lZ0xYgXBK2QymlWWA+RWnYhskLBv2vmE+hBMCtbA7KX5drWyRT/2JsqZ2IvfB9Y4bWDNMFbJRFmC9E74SoS0CqulwjkC0+5bpcV1CZ8NMej4pjy0U+doDQsGyo1hzVJttIjhQ7GnBtRFN1UarUlH8F3xict+HY07rEzoUGPlWcjRFRr4/gChZgc3ZL2d8oAAAAASUVORK5CYII=") !important;
 }
 
-.poppy-container.poppy-center > div {
+.poppy-modal-container.poppy-center > div {
     width: 500px;
     margin: auto;
 }
@@ -203,10 +272,6 @@ button.poppy-close-button {
 .poppy-warning {
     background-color: #f89406;
 }
-.poppy-modal {
-    background-color: #eeeeee;
-    padding: 10px !important;
-}
 .poppy-progress {
     position: absolute;
     left: 0;
@@ -227,6 +292,10 @@ button.poppy-close-button {
         right: -0.2em;
         top: -0.2em;
     }
+    .poppy-modal-container .poppy-close-button {
+        right: 0.2em;
+        top: 0.2em;
+    }
 }
 @media all and (min-width: 241px) and (max-width: 480px) {
     .poppy-container > div {
@@ -236,6 +305,11 @@ button.poppy-close-button {
     .poppy-container .poppy-close-button {
         right: -0.2em;
         top: -0.2em;
+    }
+    
+    .poppy-modal-container .poppy-close-button {
+        right: 0.2em;
+        top: 0.2em;
     }
 }
 @media all and (min-width: 481px) and (max-width: 768px) {

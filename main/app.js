@@ -35,13 +35,18 @@
 
 (function () {
 	'use strict';
-    
+    poppy.pop('Warning', 'Some warning here', 'I warn you!!!', function() {
+        console.log('Warning');
+    });
     poppy.pop(
         'Modal', 
         'Would you like to go on a date with me?', 
         'Click to confirm if you are willing to have the best time of your life...', 
         function () {
-            alert('Yeah');
+            console.log('Success');
+        },
+        function () {
+            console.log('Error has occured! Please try again!');
         }
     );
 })();

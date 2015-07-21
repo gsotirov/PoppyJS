@@ -13,7 +13,7 @@ var poppy = poppy || {};
 	'use strict';
 
 	var Notification = (function () {
-		function Notification(title, message, type, position, closeButton, hasControls, autoHide, timeOut, callback) {
+		function Notification(title, message, type, position, closeButton, hasControls, autoHide, timeOut, successCallback, failureCallback, callback) {
 			this._popupData = {
 				title: title,
 				message: message,
@@ -23,7 +23,9 @@ var poppy = poppy || {};
                 controls: hasControls,
 				autoHide: autoHide || DEFAULT_SETTINGS.autoHide,
 				timeOut: timeOut || DEFAULT_SETTINGS.timeOut,
-				callback: callback
+				callback: callback,
+                success: successCallback,
+                failure: failureCallback
 			};
 		};
 		return Notification;
@@ -58,8 +60,8 @@ var poppy = poppy || {};
 	})();
     
     var Modal = (function() {
-        function Modal(title, message, callback) {
-            return Notification.call(this, title, message, 'Modal', 'center', true, true, false, 0, callback);
+        function Modal(title, message, successCallback, failureCallback) {
+            return Notification.call(this, title, message, 'Modal', 'center', true, true, false, 0, successCallback, failureCallback, null);
         }
         return Modal;
     })();

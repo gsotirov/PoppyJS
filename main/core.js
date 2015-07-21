@@ -7,7 +7,7 @@ var poppy = poppy || {};
 		FADE_OUT_TIME = 20,
 		FADE_IN_TIME = 10;
 
-	function pop(type, title, message, callback) {
+	function pop(type, title, message, successCallback, failureCallback) {
 
 	    var popup;
 
@@ -22,10 +22,10 @@ var poppy = poppy || {};
 	    		popup = new p._data.Error(title, message);
 	    	break;
 	    	case 'Warning':
-	    		popup = new p._data.Warning(title, message, callback);
+	    		popup = new p._data.Warning(title, message, successCallback);
             break;
             case 'Modal':
-                popup = new p._data.Modal(title, message, callback);
+                popup = new p._data.Modal(title, message, successCallback, failureCallback);
 	    	break;
 	    }
 		// generate view from view factory
@@ -48,12 +48,27 @@ var poppy = poppy || {};
 				fadeOut(domView, FADE_OUT_TIME)
 			});
 		}
-
-		if(popup._popupData.callback) {
-			domView.addEventListener('click', function () {
-				popup._popupData.callback();
-			});
-		}
+        if(popup._popupData.type !== 'Modal') {
+            if(popup._popupData.success) {
+                domView.addEventListener('click', function () {
+                    popup._popupData.success();
+                });
+            }
+        }
+        else {
+            if(popup._popupData.success) {
+                var successButton = domView.getElementsByClassName('btn-success')[0];
+                successButton.addEventListener('click', function() {
+                    popup._popupData.success();
+                });
+            }
+            if(popup._popupData.failure) {
+                var failureButton = domView.getElementsByClassName('btn-error')[0];
+                failureButton.addEventListener('click', function() {
+                    popup._popupData.failure();
+                });
+            }
+        }
 
 		domView.style.opacity = 0;
 		document.body.appendChild(domView);

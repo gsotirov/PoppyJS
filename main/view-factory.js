@@ -38,7 +38,8 @@ var poppy = poppy || {};
             okButton = document.createElement('button'),
             cancelButton = document.createElement('button'),
             titleNode = document.createElement('div'),
-            messageNode = document.createElement('div');
+            messageNode = document.createElement('div'),
+            controlsNode = document.createElement('div');
 
         attachClasses();
 
@@ -56,22 +57,31 @@ var poppy = poppy || {};
             okButton.setAttribute('class', 'btn btn-success');
             cancelButton.setAttribute('type', 'button');
             cancelButton.setAttribute('class', 'btn btn-error');
-            popupNode.appendChild(okButton);
-            popupNode.appendChild(cancelButton);
+            controlsNode.setAttribute('class', 'controls btns');
+            controlsNode.appendChild(okButton);
+            controlsNode.appendChild(cancelButton);
         }
 
         containerNode.appendChild(popupNode);
         popupNode.appendChild(titleNode);
         popupNode.appendChild(messageNode);
+        popupNode.appendChild(controlsNode);
 
         return containerNode;
 
         function attachClasses() {
-            containerNode.className += positionClass + ' poppy-container';
+            if(popupData.type === 'Modal') {
+               containerNode.className += positionClass + ' poppy-modal-container';
+                titleNode.className += "poppy-modal-title";
+                messageNode.className += "poppy-modal-message";
+            } 
+            else {
+                containerNode.className += positionClass + ' poppy-container';
+                titleNode.className += "poppy-title";
+                messageNode.className += "poppy-message";
+            }
             popupNode.className += typeClass;
-            titleNode.className += "poppy-title";
             titleNode.innerText = title;
-            messageNode.className += "poppy-message";
             messageNode.innerText = message;
         }
     }
