@@ -7,7 +7,7 @@ var poppy = poppy || {};
 		FADE_OUT_TIME = 20,
 		FADE_IN_TIME = 10;
 
-	function pop(type, title, message, successCallback, failureCallback) {
+	function pop(type, title, message, successCallback, dismissCallback, callback) {
 
 	    var popup;
 
@@ -22,10 +22,10 @@ var poppy = poppy || {};
 	    		popup = new p._data.Error(title, message);
 	    	break;
 	    	case 'Warning':
-	    		popup = new p._data.Warning(title, message, successCallback);
+	    		popup = new p._data.Warning(title, message, callback);
             break;
-            case 'Modal':
-                popup = new p._data.Modal(title, message, successCallback, failureCallback);
+            case 'Confirm':
+                popup = new p._data.Confirm(title, message, successCallback, dismissCallback);
 	    	break;
 	    }
 		// generate view from view factory
@@ -48,24 +48,18 @@ var poppy = poppy || {};
 				fadeOut(domView, FADE_OUT_TIME)
 			});
 		}
-        if(popup._popupData.type !== 'Modal') {
-            if(popup._popupData.success) {
-                domView.addEventListener('click', function () {
-                    popup._popupData.success();
-                });
-            }
-        }
-        else {
+        if(popup._popupData.type === 'Confirm') {
+            
             if(popup._popupData.success) {
                 var successButton = domView.getElementsByClassName('btn-success')[0];
                 successButton.addEventListener('click', function() {
                     popup._popupData.success();
                 });
             }
-            if(popup._popupData.failure) {
+            if(popup._popupData.dismiss) {
                 var failureButton = domView.getElementsByClassName('btn-error')[0];
                 failureButton.addEventListener('click', function() {
-                    popup._popupData.failure();
+                    popup._popupData.dismiss();
                 });
             }
         }

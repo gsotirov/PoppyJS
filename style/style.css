@@ -6,12 +6,16 @@ under the MIT license
 */
 
 .poppy-title {
-    font-weight: bold;
+    font-weight: lighter;
+    font-family: 'Oswald', sans-serif;
+    text-shadow: 1px 1px 1px #333;
 }
 
 .poppy-message {
     -ms-word-wrap: break-word;
     word-wrap: break-word;
+    font-family: Verdana;
+    font-size: 12px;
 }
 .poppy-message a,
 .poppy-message label {
@@ -21,7 +25,7 @@ under the MIT license
     color: #cccccc;
     text-decoration: none;
 }
-.poppy-modal-container .poppy-close-button {
+.poppy-confirm-container .poppy-close-button {
     position: relative;
     right: 0.3em;
     top: 0.3em;
@@ -113,11 +117,11 @@ button.poppy-close-button {
 ---> Poppy Modal Styles
 */
 
-.poppy-modal-container {
+.poppy-confirm-container {
     padding: 0;
 }
 
-.poppy-modal {
+.poppy-confirm {
     border-radius: 5px;
     overflow: hidden;
     padding: 0 !important;
@@ -126,33 +130,33 @@ button.poppy-close-button {
     box-shadow: 0 0 5px #d4d4d4;
 }
 
-.poppy-modal-message,
-.poppy-modal-title {
+.poppy-confirm-message,
+.poppy-confirm-title {
     padding: 10px;
 }
 
-.poppy-modal-title {
+.poppy-confirm-title {
     font-family: 'Oswald';
     font-weight: Lighter;
     font-size: 26px;
-    background: #0088cc;
+    background: #2f96b4;
     color: #fff;
     text-shadow: 1px 1px 1px #333;
 }
 
-.poppy-modal-message {
+.poppy-confirm-message {
     font-size: 12px;
     color: #808080;
     line-height: 18px;
 }
 
-.poppy-modal .controls {
+.poppy-confirm .controls {
     padding: 10px;
     background: #eee;
     border-top: 1px solid #d4d4d4;
     text-align: right;
 }
-.poppy-modal .controls .btn {
+.poppy-confirm .controls .btn {
     margin-right: 5px;
     border-radius: 4px;
     cursor: pointer;
@@ -163,15 +167,15 @@ button.poppy-close-button {
     text-shadow: 1px 1px 1px #000;
     color: #fff;
 }
-.poppy-modal .controls .btn.btn-success {
+.poppy-confirm .controls .btn.btn-success {
     background: rgb(108, 181, 108);
 }
-.poppy-modal .controls .btn.btn-error {
+.poppy-confirm .controls .btn.btn-error {
     background: rgb(219, 94, 94);
 }
 
 .poppy-container,
-.poppy-modal-container {
+.poppy-confirm-container {
     position: fixed;
     z-index: 999999;
     /*overrides*/
@@ -187,7 +191,7 @@ button.poppy-close-button {
     overflow: hidden;
     margin: 0 0 6px;
     padding: 15px 15px 15px 50px;
-    width: 300px;
+    width: 400px;
     -moz-border-radius: 3px 3px 3px 3px;
     -webkit-border-radius: 3px 3px 3px 3px;
     border-radius: 3px 3px 3px 3px;
@@ -197,26 +201,6 @@ button.poppy-close-button {
     -webkit-box-shadow: 0 0 12px #999999;
     box-shadow: 0 0 12px #999999;
     color: #ffffff;
-    opacity: 0.8;
-    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
-    filter: alpha(opacity=80);
-}
-.poppy-container > div.poppy-modal {
-    position: relative;
-    overflow: hidden;
-    margin: 0 0 6px;
-    padding: 15px 15px 15px 50px;
-    width: 300px;
-    -moz-border-radius: 3px 3px 3px 3px;
-    -webkit-border-radius: 3px 3px 3px 3px;
-    border-radius: 3px 3px 3px 3px;
-    background-position: 15px center;
-    background-repeat: no-repeat;
-    -moz-box-shadow: 0 0 12px #999999;
-    -webkit-box-shadow: 0 0 12px #999999;
-    box-shadow: 0 0 12px #999999;
-    color: #333;
-    opacity: 1;
     -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
     filter: alpha(opacity=80);
 }
@@ -242,14 +226,14 @@ button.poppy-close-button {
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGYSURBVEhL5ZSvTsNQFMbXZGICMYGYmJhAQIJAICYQPAACiSDB8AiICQQJT4CqQEwgJvYASAQCiZiYmJhAIBATCARJy+9rTsldd8sKu1M0+dLb057v6/lbq/2rK0mS/TRNj9cWNAKPYIJII7gIxCcQ51cvqID+GIEX8ASG4B1bK5gIZFeQfoJdEXOfgX4QAQg7kH2A65yQ87lyxb27sggkAzAuFhbbg1K2kgCkB1bVwyIR9m2L7PRPIhDUIXgGtyKw575yz3lTNs6X4JXnjV+LKM/m3MydnTbtOKIjtz6VhCBq4vSm3ncdrD2lk0VgUXSVKjVDJXJzijW1RQdsU7F77He8u68koNZTz8Oz5yGa6J3H3lZ0xYgXBK2QymlWWA+RWnYhskLBv2vmE+hBMCtbA7KX5drWyRT/2JsqZ2IvfB9Y4bWDNMFbJRFmC9E74SoS0CqulwjkC0+5bpcV1CZ8NMej4pjy0U+doDQsGyo1hzVJttIjhQ7GnBtRFN1UarUlH8F3xict+HY07rEzoUGPlWcjRFRr4/gChZgc3ZL2d8oAAAAASUVORK5CYII=") !important;
 }
 
-.poppy-modal-container.poppy-center > div {
+.poppy-confirm-container.poppy-center > div {
     width: 500px;
     margin: auto;
 }
 
 .poppy-container.poppy-top-center > div,
 .poppy-container.poppy-bottom-center > div {
-    width: 300px;
+    width: 400px;
     margin: auto;
 }
 .poppy-container.poppy-top-full-width > div,
@@ -260,6 +244,7 @@ button.poppy-close-button {
 .poppy {
     background-color: #030303;
 }
+
 .poppy-success {
     background-color: #51a351;
 }
@@ -292,7 +277,7 @@ button.poppy-close-button {
         right: -0.2em;
         top: -0.2em;
     }
-    .poppy-modal-container .poppy-close-button {
+    .poppy-confirm-container .poppy-close-button {
         right: 0.2em;
         top: 0.2em;
     }
@@ -307,7 +292,7 @@ button.poppy-close-button {
         top: -0.2em;
     }
     
-    .poppy-modal-container .poppy-close-button {
+    .poppy-confirm-container .poppy-close-button {
         right: 0.2em;
         top: 0.2em;
     }

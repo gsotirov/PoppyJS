@@ -1,53 +1,38 @@
 
 /*
-===> Login form test (Success/Error)
-*/
-
-/*(function () {
-	'use strict';
-
-	var form = document.getElementById('login-form');
-
-	form.addEventListener('submit', function (event) {
-
-		event.preventDefault();
-
-		var correctUserName = 'Cortez',
-			correctPassword = '1234';
-
-		var username = document.getElementById('tb-username').value,
-			password = document.getElementById('tb-password').value;
-
-		if(username === correctUserName && password === correctPassword) {
-			poppy.pop('Success', 'Success!', 'You have successfully logged in!');
-		}
-		else {
-			poppy.pop('Error', 'Something went wrong!', 'Your credentials seem to be incorrect. Please double-check and try again.');
-		}
-	});
-
-})();*/
-
-
-/*
-	===> Static Tests (All notifications(Success, Error, Info, Warning))
+	===> Static Tests (All notifications(Success, Error, Info, Warning, Modal))
 */
 
 (function () {
 	'use strict';
-    poppy.pop('Warning', 'Some warning here', 'I warn you!!!', function() {
-        console.log('Warning');
+    
+    poppy.pop('Warning', 'Some warning here', 'I warn you!!!', null, null, function() {
+        console.log('Warning, you are on thin ice');
     });
+    
     poppy.pop(
-        'Modal', 
-        'Would you like to go on a date with me?', 
-        'Click to confirm if you are willing to have the best time of your life...', 
-        function () {
+        'Confirm', 
+        'Are you sure you want to delete this item?', 
+        'If you click \'Yes\' the item will be delete and could not be restored!', function () {
             console.log('Success');
-        },
-        function () {
+        }, function () {
             console.log('Error has occured! Please try again!');
         }
+    );
+    
+    poppy.pop('Success', 
+              'Login Successful',
+              'You have successfully logged in to our website!'
+    );
+    
+    poppy.pop('Info', 
+              'Messages waiting for your attention!',
+              'You have 25 unread messages in your inbox!'
+    );
+    
+    poppy.pop('Error',
+              'Something went wrong!',
+              'The credentials you are using to log in seem to be incorrect. Please try again...'
     );
 })();
 

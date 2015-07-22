@@ -5,6 +5,8 @@ var poppy = poppy || {};
     'use strict';
 
     var CLOSE_BUTTON_TEXT = '×',
+        OK_BUTTON_TEXT = 'Yes',
+        DISMISS_BUTTON_TEXT = 'No',
         POSITIONS = {
             'topLeft': 'poppy-top-left',
             'topRight': 'poppy-top-right',
@@ -17,7 +19,7 @@ var poppy = poppy || {};
             'Info': 'poppy-info',
             'Success': 'poppy-success',
             'Warning': 'poppy-warning',
-            'Modal': 'poppy-modal'
+            'Confirm': 'poppy-confirm'
         };
 
     var createPopupView = function(popup) {
@@ -29,7 +31,7 @@ var poppy = poppy || {};
             close = popupData.closeButton || false,
             controls = popupData.controls || false,
             title = popupData.title,
-            message = popupData.message,
+            content = popupData.content,
             callback = popupData.callback;
 
         var containerNode = document.createElement('div'),
@@ -38,7 +40,7 @@ var poppy = poppy || {};
             okButton = document.createElement('button'),
             cancelButton = document.createElement('button'),
             titleNode = document.createElement('div'),
-            messageNode = document.createElement('div'),
+            contentNode = document.createElement('div'),
             controlsNode = document.createElement('div');
 
         attachClasses();
@@ -51,8 +53,8 @@ var poppy = poppy || {};
         }
         
         if (controls === true) {
-            okButton.innerText = 'Ok';
-            cancelButton.innerText = 'Cancel';
+            okButton.innerText = OK_BUTTON_TEXT;
+            cancelButton.innerText = DISMISS_BUTTON_TEXT;
             okButton.setAttribute('type', 'button');
             okButton.setAttribute('class', 'btn btn-success');
             cancelButton.setAttribute('type', 'button');
@@ -64,25 +66,25 @@ var poppy = poppy || {};
 
         containerNode.appendChild(popupNode);
         popupNode.appendChild(titleNode);
-        popupNode.appendChild(messageNode);
+        popupNode.appendChild(contentNode);
         popupNode.appendChild(controlsNode);
 
         return containerNode;
 
         function attachClasses() {
-            if(popupData.type === 'Modal') {
-               containerNode.className += positionClass + ' poppy-modal-container';
-                titleNode.className += "poppy-modal-title";
-                messageNode.className += "poppy-modal-message";
+            if(popupData.type === 'Confirm') {
+               containerNode.className += positionClass + ' poppy-confirm-container';
+                titleNode.className += "poppy-confirm-title";
+                contentNode.className += "poppy-confirm-message";
             } 
             else {
                 containerNode.className += positionClass + ' poppy-container';
                 titleNode.className += "poppy-title";
-                messageNode.className += "poppy-message";
+                contentNode.className += "poppy-message";
             }
             popupNode.className += typeClass;
             titleNode.innerText = title;
-            messageNode.innerText = message;
+            contentNode.innerText = content;
         }
     }
 
